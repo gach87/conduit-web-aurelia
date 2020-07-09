@@ -1,0 +1,14 @@
+<template>
+  <div class="feed-toggle">
+    <ul class="nav nav-pills outline-active">
+      <li repeat.for="feed of feeds" class="nav-item">
+        <a
+          class="nav-link"
+          class.bind="feed.id === selected ? 'active' : ''"
+          click.delegate="onSelected(feed)"
+          >${feed.name}</a
+        >
+      </li>
+    </ul>
+  </div>
+</template>

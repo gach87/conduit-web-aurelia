@@ -1,0 +1,18 @@
+<template>
+  <div class="sidebar">
+    <p>Popular Tags</p>
+
+
+    <div if.bind="(tags && tags.length === 0)">No tags are here... yet.</div>
+
+    <div class="tag-list" if.bind="(tags && tags.length > 0)">
+      <button
+        class="tag-default tag-pill"
+        repeat.for="tag of tags"
+        click.delegate="onSelected(tag)"
+      >
+        ${tag}
+      </button>
+    </div>
+  </div>
+</template>

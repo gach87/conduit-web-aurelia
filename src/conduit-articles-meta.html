@@ -1,0 +1,14 @@
+<template>
+  <div class="article-meta">
+    <a>
+      <img src.bind="article.author.image" />
+    </a>
+    <div class="info">
+      <a class="author" href.bind="'#/profile/'+article.author.username"
+        >${article.author.username}</a
+      >
+      <span class="date">${date}</span>
+    </div>
+    <slot></slot>
+  </div>
+</template>

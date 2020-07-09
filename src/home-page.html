@@ -1,0 +1,50 @@
+<template>
+  <require from="./conduit-tags-popular"></require>
+  <require from="./conduit-articles-feed"></require>
+  <require from="./conduit-articles-list"></require>
+  <require from="./conduit-articles-list-item"></require>
+  <require from="./conduit-articles-preview"></require>
+  <require from="./conduit-articles-meta"></require>
+  <require from="./conduit-buttons-favorite"></require>
+
+  <div class="home-page">
+    <div class="banner">
+      <div class="container">
+        <h1 class="logo-font">conduit</h1>
+        <p>A place to share your knowledge.</p>
+      </div>
+    </div>
+    <div class="container page">
+      <div class="row">
+        <div class="col-md-9">
+          <conduit-articles-feed
+            feeds.bind="feeds"
+            selected.bind="selectedFeed"
+            on-selected.call="onFeedSelected($event)"
+          ></conduit-articles-feed>
+          <conduit-articles-list>
+            <conduit-articles-list-item repeat.for="article of articles">
+              <conduit-articles-preview article.bind="article">
+                <conduit-articles-meta article.bind="article">
+                  <conduit-buttons-favorite
+                    article.bind="article"
+                    on-favorited.call="onFavoritedArticle($event)"
+                  ></conduit-buttons-favorite>
+                </conduit-articles-meta>
+              </conduit-articles-preview>
+            </conduit-articles-list-item>
+          </conduit-articles-list>
+        </div>
+        <div class="col-md-3">
+          <div if.bind="!tags">Loading tags...</div>
+
+          <conduit-tags-popular
+            if.bind="tags"
+            tags.bind="tags"
+            on-selected.call="onTagSelected($event)"
+          ></conduit-tags-popular>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
