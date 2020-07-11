@@ -1,8 +1,6 @@
 <template>
   <require from="./conduit-tags-popular"></require>
   <require from="./conduit-articles-feed"></require>
-  <require from="./conduit-articles-list"></require>
-  <require from="./conduit-articles-list-item"></require>
   <require from="./conduit-articles-preview"></require>
   <require from="./conduit-articles-meta"></require>
   <require from="./conduit-buttons-favorite"></require>
@@ -22,18 +20,16 @@
             selected.bind="selectedFeed"
             on-selected.call="onFeedSelected($event)"
           ></conduit-articles-feed>
-          <conduit-articles-list>
-            <conduit-articles-list-item repeat.for="article of articles">
-              <conduit-articles-preview article.bind="article">
-                <conduit-articles-meta article.bind="article">
-                  <conduit-buttons-favorite
-                    article.bind="article"
-                    on-favorited.call="onFavoritedArticle($event)"
-                  ></conduit-buttons-favorite>
-                </conduit-articles-meta>
-              </conduit-articles-preview>
-            </conduit-articles-list-item>
-          </conduit-articles-list>
+          <div repeat.for="article of articles">
+            <conduit-articles-preview article.bind="article">
+              <conduit-articles-meta article.bind="article">
+                <conduit-buttons-favorite
+                  article.bind="article"
+                  on-favorited.call="onFavoritedArticle($event)"
+                ></conduit-buttons-favorite>
+              </conduit-articles-meta>
+            </conduit-articles-preview>
+          </div>
         </div>
         <div class="col-md-3">
           <div if.bind="!tags">Loading tags...</div>
