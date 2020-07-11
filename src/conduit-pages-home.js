@@ -1,6 +1,6 @@
-import service from "./conduit-home-page-service";
+import service from "./conduit-pages-home-service";
 
-export class ConduitHomePage {
+export class ConduitPagesHome {
   articles = undefined;
   tags = undefined;
   feeds = undefined;
