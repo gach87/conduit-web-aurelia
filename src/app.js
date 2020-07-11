@@ -7,7 +7,7 @@ export class App {
       {
         route: ["", "home"],
         name: "home",
-        moduleId: PLATFORM.moduleName("home-page"),
+        moduleId: PLATFORM.moduleName("conduit-home-page"),
       },
     ]);
   }
