@@ -7,57 +7,44 @@ export class ConduitPagesHome {
   selectedFeed = undefined;
 
   constructor() {
-    this.init();
+    service.init().then((state) => this.setState(state));
   }
 
   onTagSelected(tag) {
-    const tagFeed = {
-      id: tag.toLowerCase(),
-      name: "#" + tag,
-    };
-    this.feeds.push(tagFeed);
-    this.selectedFeed = tagFeed.id;
     service
-      .fetchArticles({
-        limit: 10,
-        offset: 0,
-        feed: tagFeed,
-      })
-      .then((articles) => (this.articles = articles));
+      .onTagSelected({ tag, state: this.getState() })
+      .then((state) => this.setState(state));
   }
 
-  onFeedSelected(selectedFeed) {
-    this.selectedFeed = selectedFeed.id;
+  onFeedSelected(feed) {
     service
-      .fetchArticles({
-        limit: 10,
-        offset: 0,
-        feed: selectedFeed,
-      })
-      .then((articles) => (this.articles = articles));
+      .onFeedSelected({ feed, state: this.getState() })
+      .then((state) => this.setState(state));
   }
 
   onFavoritedArticle(article) {
     console.log(article);
   }
 
-  init() {
-    Promise.all([
-      service.fetchArticles({ feed: { name: "all" }, limit: 10, offset: 0 }),
-      service.fetchTags(),
-    ])
-      .then(([articles, tags]) => ({
-        articles: articles,
-        tags: tags,
-      }))
-      .then((state) => {
-        this.articles = state.articles;
-        this.tags = state.tags;
-        this.feeds = [
-          { id: "personal", name: "Your feed" },
-          { id: "all", name: "Global Feed" },
-        ];
-        this.selectedFeed = "all";
-      });
+  getState() {
+    return JSON.parse(
+      JSON.stringify({
+        articles: this.articles,
+        pages: this.pages,
+        tags: this.tags,
+        feeds: this.feeds,
+        selectedFeed: this.selectedFeed,
+        selectedPage: this.selectedPage,
+      })
+    );
+  }
+
+  setState(input) {
+    this.articles = input.articles;
+    this.pages = input.pages;
+    this.tags = input.tags;
+    this.feeds = input.feeds;
+    this.selectedFeed = input.selectedFeed;
+    this.selectedPage = input.selectedPage;
   }
 }
