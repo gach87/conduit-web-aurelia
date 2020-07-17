@@ -1,10 +1,7 @@
 import service from "./conduit-pages-home-service";
 
 export class ConduitPagesHome {
-  articles = undefined;
-  tags = undefined;
-  feeds = undefined;
-  selectedFeed = undefined;
+  state = undefined;
 
   constructor() {
     service.init().then((state) => this.setState(state));
@@ -27,24 +24,10 @@ export class ConduitPagesHome {
   }
 
   getState() {
-    return JSON.parse(
-      JSON.stringify({
-        articles: this.articles,
-        pages: this.pages,
-        tags: this.tags,
-        feeds: this.feeds,
-        selectedFeed: this.selectedFeed,
-        selectedPage: this.selectedPage,
-      })
-    );
+    return JSON.parse(JSON.stringify(this.state));
   }
 
   setState(input) {
-    this.articles = input.articles;
-    this.pages = input.pages;
-    this.tags = input.tags;
-    this.feeds = input.feeds;
-    this.selectedFeed = input.selectedFeed;
-    this.selectedPage = input.selectedPage;
+    this.state = Object.assign({}, input);
   }
 }
