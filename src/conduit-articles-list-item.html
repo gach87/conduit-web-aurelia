@@ -1,0 +1,14 @@
+<template>
+  <require from="./conduit-articles-preview"></require>
+  <require from="./conduit-articles-meta"></require>
+  <require from="./conduit-buttons-favorite"></require>
+
+  <conduit-articles-preview article.bind="article">
+    <conduit-articles-meta article.bind="article">
+      <conduit-buttons-favorite
+        article.bind="article"
+        on-favorited.call="onFavoritedArticle($event)"
+      ></conduit-buttons-favorite>
+    </conduit-articles-meta>
+  </conduit-articles-preview>
+</template>

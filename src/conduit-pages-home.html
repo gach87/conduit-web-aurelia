@@ -1,9 +1,7 @@
 <template>
   <require from="./conduit-tags-popular"></require>
   <require from="./conduit-articles-feed"></require>
-  <require from="./conduit-articles-preview"></require>
-  <require from="./conduit-articles-meta"></require>
-  <require from="./conduit-buttons-favorite"></require>
+  <require from="./conduit-articles-list"></require>
 
   <div class="home-page">
     <div class="banner">
@@ -20,16 +18,8 @@
             selected.bind="state.selectedFeed"
             on-selected.call="onFeedSelected($event)"
           ></conduit-articles-feed>
-          <div repeat.for="article of state.articles">
-            <conduit-articles-preview article.bind="article">
-              <conduit-articles-meta article.bind="article">
-                <conduit-buttons-favorite
-                  article.bind="article"
-                  on-favorited.call="onFavoritedArticle($event)"
-                ></conduit-buttons-favorite>
-              </conduit-articles-meta>
-            </conduit-articles-preview>
-          </div>
+          <conduit-articles-list articles.bind="state.articles">
+          </conduit-articles-list>
         </div>
         <div class="col-md-3">
           <div if.bind="!state.tags">Loading tags...</div>
